@@ -5,6 +5,11 @@ module Api::V1
       render json: @customers
     end
 
+    def show
+      @customer = Customer.find(params[:id])
+      render json: @customer
+    end
+
     def create
       @customer = Customer.create(customer_params)
       render json: @idea
