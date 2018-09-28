@@ -10,14 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_09_27_081844) do
-
-  create_table "branches", force: :cascade do |t|
-    t.integer "user_id"
-    t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
+ActiveRecord::Schema.define(version: 2018_09_28_092012) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -30,6 +23,31 @@ ActiveRecord::Schema.define(version: 2018_09_27_081844) do
     t.string "issued_by"
     t.datetime "issue_date"
     t.boolean "in_blacklist", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "user_id"
+  end
+
+  create_table "equipment", force: :cascade do |t|
+    t.string "name"
+    t.string "vendor_code"
+    t.string "serial_number"
+    t.string "state"
+    t.integer "price_per_hour"
+    t.integer "price_per_day"
+    t.integer "price_per_month"
+    t.integer "rents_count"
+    t.integer "total_rents_price"
+    t.integer "user_id"
+    t.integer "group_id"
+    t.string "size"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
