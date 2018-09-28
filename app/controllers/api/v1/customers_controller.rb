@@ -3,7 +3,7 @@ module Api::V1
     before_action :authenticate_user!
 
     def index
-      @customers = Customer.order('created_at DESC')
+      @customers = current_user.customers.order('created_at DESC')
       render json: @customers
     end
 
@@ -13,7 +13,7 @@ module Api::V1
     end
 
     def create
-      @customer = Customer.create(customer_params)
+      @customer = current_user.customers.create(customer_params)
       render json: @idea
     end
 
