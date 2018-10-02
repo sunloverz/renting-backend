@@ -3,7 +3,6 @@ module Api::V1
     before_action :authenticate_user!
 
     def index
-      puts "current user #{user.name}"
       equipments = current_user.equipments.order('created_at DESC')
       render json: equipments
     end
