@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
       resources :customers
       resources :equipments
+      resources :carts
+      resources :rents
 
     end
   end

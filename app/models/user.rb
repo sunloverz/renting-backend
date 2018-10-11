@@ -10,4 +10,5 @@ class User < ActiveRecord::Base
   has_many :equipments
   has_many :customers
   has_many :groups
+  has_many :rents
 end

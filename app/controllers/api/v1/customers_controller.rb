@@ -14,7 +14,7 @@ module Api::V1
 
     def create
       @customer = current_user.customers.create(customer_params)
-      render json: @idea
+      render json: @customer
     end
 
     def update
