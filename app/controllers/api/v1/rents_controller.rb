@@ -7,11 +7,15 @@ class Api::V1::RentsController < ApplicationController
 
   def show
     rent = Rent.find(params[:id])
+    render json: rent
   end
 
   def create
     rent = current_user.rents.create(rent_params)
-    render json: rent
+    params[:rent][:equipment_ids].each {|id| rent.line_items.build(equipment_id: id) }
+    rent.save!
+
+    render json:  rent.to_json(include: [:line_items])
   end
 
   def destroy
