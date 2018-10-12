@@ -36,7 +36,7 @@ module Api::V1
 
     def equipment_params
       params.require(:equipment).permit(:name, :vendor_code, :serial_number, :size,
-                                        :state, :price_per_hour, :price_per_day, :price_per_month,
+                                        :status, :price_per_hour, :price_per_day, :price_per_month,
                                         :rents_count, :total_rents_price, :group_id, :user_id)
 
     end

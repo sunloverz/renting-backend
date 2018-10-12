@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_11_074525) do
+ActiveRecord::Schema.define(version: 2018_10_12_110812) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_074525) do
     t.string "name"
     t.string "vendor_code"
     t.string "serial_number"
-    t.string "state"
+    t.string "status"
     t.integer "price_per_hour"
     t.integer "price_per_day"
     t.integer "price_per_month"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 2018_10_11_074525) do
     t.integer "paid"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "duration"
   end
 
   create_table "users", force: :cascade do |t|
