@@ -4,7 +4,7 @@ class Api::V1::RentsController < ApplicationController
 
 
   def index
-    render json: current_user.rents
+    render json: current_user.rents.to_json(include: :customer)
   end
 
   def show
