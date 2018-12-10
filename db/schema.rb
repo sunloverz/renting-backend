@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_10_12_110812) do
+ActiveRecord::Schema.define(version: 2018_11_23_112103) do
 
   create_table "customers", force: :cascade do |t|
     t.string "name"
@@ -59,12 +59,17 @@ ActiveRecord::Schema.define(version: 2018_10_12_110812) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "rent_items", force: :cascade do |t|
+    t.integer "equipment_id"
+    t.integer "rent_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "rents", force: :cascade do |t|
     t.string "status"
-    t.string "rent_type"
     t.datetime "start_date"
     t.datetime "end_date"
-    t.integer "price"
     t.integer "discount"
     t.integer "customer_id"
     t.integer "user_id"
@@ -72,6 +77,8 @@ ActiveRecord::Schema.define(version: 2018_10_12_110812) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "duration"
+    t.integer "total_price"
+    t.integer "subtotal_price"
   end
 
   create_table "users", force: :cascade do |t|

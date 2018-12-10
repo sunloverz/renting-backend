@@ -1,7 +1,5 @@
 class Api::V1::RentsController < ApplicationController
   before_action :authenticate_user!
-  STATUSES = {rented: 'rented', reserved: 'reserved', expired: 'expired'}
-
 
   def index
     render json: current_user.rents.to_json(include: :customer)
@@ -9,18 +7,15 @@ class Api::V1::RentsController < ApplicationController
 
   def show
     rent = Rent.find(params[:id])
-    render json: rent
+    render json: rent.to_json(include: [:equipments])
   end
 
   def create
-    rent = current_user.rents.create(rent_params)
-    params[:rent][:equipment_ids].each {|id| rent.line_items.build(equipment_id: id) }
-    rent.save!
-
+    rent = current_user.rents.create(rent_params.merge(user_id: current_user.id))
     equipments = Equipment.where(id: params[:rent][:equipment_ids])
-    equipments.update_all(status: STATUSES[:rented])
+    equipments.update_all(status: rent_params[:status])
 
-    render json:  rent.to_json(include: [:line_items])
+    render json:  rent.to_json(include: [:equipments])
   end
 
   def destroy
@@ -37,7 +32,7 @@ class Api::V1::RentsController < ApplicationController
   private
 
   def rent_params
-    params.require(:rent).permit(:status, :rent_type, :start_date, :end_date, :price,
-                                 :paid, :discount, :customer_id, :duration)
+    params.require(:rent).permit(:status, :start_date, :end_date, :subtotal_price, :total_price, 
+                                 :paid, :discount, :customer_id, :duration, equipment_ids: [])
   end
 end

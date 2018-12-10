@@ -1,5 +1,18 @@
 class Rent < ApplicationRecord
-  has_many :line_items
+  include AASM
+  has_many :rent_items
+  has_many :equipments, through: :rent_items
   belongs_to :user
   belongs_to :customer
-end
+
+  aasm column: 'status' do
+    state :reserved
+    state :rented 
+    state :expired 
+    state :returned   
+
+    event :return do
+      transitions from: [:reserved, :rented], to: :returned
+    end
+   end
+ end
